@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColumnContainer, ColumnTitle } from './styles'
+import { ColumnContainer, ColumnTitle, AddItemButton } from './styles'
 
 interface IColumnProps {
   text?: string
