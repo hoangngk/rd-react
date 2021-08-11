@@ -48,7 +48,7 @@ const AppStateContext = createContext<AppStateContextProps>(
 
 type Action =
   | { type: 'ADD_LIST'; payload: string }
-  | { type: 'ADD_TASK'; payload: { text: string; taskId: string } }
+  | { type: 'ADD_TASK'; payload: { text: string; laneId: string } }
 
 const appStateReducer = (state: AppState, action: Action) => {
   switch (action.type) {
@@ -58,7 +58,7 @@ const appStateReducer = (state: AppState, action: Action) => {
         lists: [...state.lists, { id: v4(), text: action.payload, tasks: [] }],
       }
     case 'ADD_TASK':
-      const targetLaneIndex = findItemIndexById(state.lists, action.payload.taskId)
+      const targetLaneIndex = findItemIndexById(state.lists, action.payload.laneId)
       state.lists[targetLaneIndex].tasks.push({
         id: v4(),
         text: action.payload.text,

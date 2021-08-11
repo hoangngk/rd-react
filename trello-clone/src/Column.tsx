@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { AddNewItem } from './AddNewItem'
 import { useAppState } from './AppStateContext'
 import { ColumnContainer, ColumnTitle } from './styles'
@@ -22,7 +22,7 @@ export const Column = ({
         dark
         toggleButtonText="+ Add another task"
         onAdd={(text) => {
-          dispatch({ type: 'ADD_TASK', payload: { text, taskId: id } })
+          dispatch({ type: 'ADD_TASK', payload: { text, laneId: id } })
         }}
       ></AddNewItem>
     </ColumnContainer>
