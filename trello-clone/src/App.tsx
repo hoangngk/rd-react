@@ -6,12 +6,12 @@ import { Column } from './Column'
 import { AppContainer } from './styles'
 
 const App = () => {
-  const { state } = useAppState()
+  const { state, dispatch } = useAppState()
 
   return (
     <AppContainer>
       {state.lists.map((list) => (
-        <Column text={list.text} key={list.id}>
+        <Column text={list.text} key={list.id} id={list.id}>
           {list.tasks.map((task) => (
             <Card text={task.text} key={task.id}></Card>
           ))}
@@ -19,7 +19,9 @@ const App = () => {
       ))}
       <AddNewItem
         toggleButtonText="+ Add another list"
-        onAdd={() => {}}
+        onAdd={(text) => {
+          dispatch({ type: 'ADD_LIST', payload: text })
+        }}
       ></AddNewItem>
     </AppContainer>
   )
