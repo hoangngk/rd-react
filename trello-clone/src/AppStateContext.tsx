@@ -1,6 +1,8 @@
 import { createContext, useContext, useReducer } from 'react'
 import { v4 } from 'uuid'
+import { DragItem } from './DragItem'
 import { findItemIndexById } from './utils/findItemIndexById'
+import { moveItem } from './utils/moveItem'
 
 const appData: AppState = {
   lists: [
@@ -49,6 +51,8 @@ const AppStateContext = createContext<AppStateContextProps>(
 type Action =
   | { type: 'ADD_LIST'; payload: string }
   | { type: 'ADD_TASK'; payload: { text: string; laneId: string } }
+  | { type: 'MOVE_LIST'; payload: { dragIndex: number; hoverIndex: number } }
+  | { type: 'SET_DRAGGED_ITEM'; payload: DragItem | undefined }
 
 const appStateReducer = (state: AppState, action: Action) => {
   switch (action.type) {
@@ -64,6 +68,12 @@ const appStateReducer = (state: AppState, action: Action) => {
         text: action.payload.text,
       })
       return { ...state }
+    case 'MOVE_LIST':
+      const { dragIndex, hoverIndex } = action.payload
+      state.lists = moveItem(state.lists, dragIndex, hoverIndex)
+      return { ...state }
+    case 'SET_DRAGGED_ITEM':
+      return { ...state, draggedItem: action.payload }
     default:
       return state
   }

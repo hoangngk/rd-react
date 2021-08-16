@@ -3,11 +3,15 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AppStateProvider } from './AppStateContext'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
 ReactDOM.render(
-  <AppStateProvider>
-    <App />
-  </AppStateProvider>,
+  <DndProvider backend={HTML5Backend}>
+    <AppStateProvider>
+      <App />
+    </AppStateProvider>
+  </DndProvider>,
   document.getElementById('root')
 )
 
