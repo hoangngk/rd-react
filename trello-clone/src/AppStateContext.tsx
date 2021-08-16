@@ -26,6 +26,7 @@ const appData: AppState = {
 
 interface AppState {
   lists: List[]
+  draggedItem?: DragItem
 }
 
 interface List {

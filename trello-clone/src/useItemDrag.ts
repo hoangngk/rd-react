@@ -6,6 +6,9 @@ export const useItemDrag = (item: DragItem) => {
   const { dispatch } = useAppState()
   const [, drag] = useDrag({
     type: item.type,
+    // collect: (monitor) => ({
+    //   isDragging: monitor.isDragging()
+    // }),
     item: () => {
       dispatch({ type: 'SET_DRAGGED_ITEM', payload: item })
       return item
