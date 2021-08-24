@@ -12,9 +12,10 @@ interface IColumnProps {
   id: string
   text: string
   index: number
+  isPreview?: boolean
 }
 
-export const Column = ({ id, text, index }: IColumnProps) => {
+export const Column = ({ id, text, index, isPreview }: IColumnProps) => {
   const { state, dispatch } = useAppState()
   const ref = useRef<HTMLDivElement>(null)
   const { drag } = useItemDrag({ type: 'COLUMN', id, text, index })
@@ -36,7 +37,11 @@ export const Column = ({ id, text, index }: IColumnProps) => {
   drag(drop(ref))
 
   return (
-    <ColumnContainer ref={ref} isHidden={isHidden(state.draggedItem, 'COLUMN', id)}>
+    <ColumnContainer
+      ref={ref}
+      isPreview={isPreview}
+      isHidden={isHidden(isPreview, state.draggedItem, 'COLUMN', id)}
+    >
       <ColumnTitle>{text}</ColumnTitle>
       {state.lists[index].tasks.map((task) => (
         <Card text={task.text} key={task.id}></Card>
