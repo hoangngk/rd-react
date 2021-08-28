@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDrop } from 'react-dnd'
 import { useAppState } from './AppStateContext'
-import { CardDragItem, DragItem } from './DragItem'
+import { CardDragItem } from './DragItem'
 import { CardContainer } from './styles'
 import { useItemDrag } from './useItemDrag'
 import { isHidden } from './utils/isHidden'
@@ -32,7 +32,7 @@ export const Card = ({ text, id, index, columnId, isPreview }: CardProps) => {
       const sourceColumn = item.columnId
 
       dispatch({
-        type: 'MOVE_CARD',
+        type: 'MOVE_TASK',
         payload: { dragIndex, hoverIndex, sourceColumn, targetColumn },
       })
       item.index = hoverIndex

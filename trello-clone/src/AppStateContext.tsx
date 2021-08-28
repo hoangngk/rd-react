@@ -9,7 +9,10 @@ const appData: AppState = {
     {
       id: '0',
       text: 'To Do',
-      tasks: [{ id: 'c0', text: 'Generate app scaffold' }],
+      tasks: [
+        { id: 'c0', text: 'Generate app scaffold' },
+        { id: 'c1', text: 'Learn Angular' },
+      ],
     },
     {
       id: '1',
@@ -54,7 +57,7 @@ type Action =
   | { type: 'ADD_TASK'; payload: { text: string; laneId: string } }
   | { type: 'MOVE_LIST'; payload: { dragIndex: number; hoverIndex: number } }
   | {
-      type: 'MOVE_CARD'
+      type: 'MOVE_TASK'
       payload: {
         dragIndex: number
         hoverIndex: number
@@ -88,12 +91,22 @@ const appStateReducer = (state: AppState, action: Action) => {
       return { ...state }
     }
 
-    case 'MOVE_CARD': {
+    case 'MOVE_TASK': {
       const { dragIndex, hoverIndex, sourceColumn, targetColumn } = action.payload
+      console.log('source column id ', sourceColumn)
+      console.log('target column id ', targetColumn)
+
       const sourceLaneIndex = findItemIndexById(state.lists, sourceColumn)
       const targetLaneIndex = findItemIndexById(state.lists, targetColumn)
+
+      console.log('source land index ', sourceLaneIndex)
+      console.log('target land index ', targetLaneIndex)
+
       const item = state.lists[sourceLaneIndex].tasks.splice(dragIndex, 1)[0]
+
+      console.log('item ', item)
       state.lists[targetLaneIndex].tasks.splice(hoverIndex, 0, item)
+
       return { ...state }
     }
 
