@@ -43,8 +43,14 @@ export const Column = ({ id, text, index, isPreview }: IColumnProps) => {
       isHidden={isHidden(isPreview, state.draggedItem, 'COLUMN', id)}
     >
       <ColumnTitle>{text}</ColumnTitle>
-      {state.lists[index].tasks.map((task) => (
-        <Card text={task.text} key={task.id}></Card>
+      {state.lists[index].tasks.map((task, index) => (
+        <Card
+          text={task.text}
+          key={task.id}
+          id={task.id}
+          index={index}
+          columnId={state.lists[index].id}
+        ></Card>
       ))}
       <AddNewItem
         dark
