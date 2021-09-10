@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import { users } from './users'
+import { notifications } from './notifications'
 
 const app = express()
 
@@ -18,6 +20,9 @@ app.post('/save', (req, res) => {
 })
 
 app.get('/load', (req, res) => res.json({ lists }))
+
+app.get('/services/users', (req, res) => res.json({ users }))
+app.get('/services/notifications', (req, res) => res.json(notifications))
 
 app.listen(port, () =>
   console.log(`Kanban backend running on http://localhost:${port}!`)
